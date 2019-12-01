@@ -95,7 +95,7 @@ public class Solution {
                   currProcess.generate = true;
                   int pageNumber = getPage(wordNumber);
                   currProcess.pageList.get(pageNumber).lastUsed = time;
-                  System.out.print("Process " + (i+1) + " references word  " + wordNumber + "(page " + pageNumber + ") " + "at time " + time  + " references Left " + currProcess.referencesLeft );
+                  //System.out.print("Process " + (i+1) + " references word  " + wordNumber + "(page " + pageNumber + ") " + "at time " + time  + " references Left " + currProcess.referencesLeft );
                   if(isPageLoaded(currProcess, pageNumber)){
                     currProcess.referencesLeft  -= 1;
                     continue;
@@ -103,7 +103,7 @@ public class Solution {
                     // if(currProcess.processNumber == 0){
                     //   System.out.println("TEST");
                     // }
-                    System.out.print("Fault " );
+                    //System.out.print("Fault " );
                     currProcess.pageFaults += 1;
                     loadPage(currProcess, pageNumber);
                   }
@@ -154,7 +154,7 @@ public class Solution {
           System.out.println("Process " + (p.processNumber + 1) + " had " + p.pageFaults + " faults");
           System.out.println("With no evictions, the average residence is undefined");
         }else{
-          System.out.println("Process " + (p.processNumber + 1) + " had " + p.pageFaults + " faults and " + (residencyProcess / evictionsProcess) + " average residency time "  + evictionsProcess + " total evictions" + " residency total " + residencyProcess );
+          System.out.println("Process " + (p.processNumber + 1) + " had " + p.pageFaults + " faults and " + (residencyProcess / evictionsProcess) + " average residency time "  );
         }
       }
       System.out.println();
@@ -170,14 +170,14 @@ public class Solution {
     public static int getWordNumber(int processNumber){
       Process currProcess = processList.get(processNumber);
       int wordNumber = -1;
-      if(time == 1){
-        System.out.println("TEST " + currProcess.referencesLeft + " " + numReferences );
-      }
+      // if(time == 1){
+      //   System.out.println("TEST " + currProcess.referencesLeft + " " + numReferences );
+      // }
       if(currProcess.referencesLeft == numReferences){
            wordNumber =  getFirstWordNumber(processNumber);
       }else{
         double random = randomScanner.nextInt();
-        System.out.println(random);
+        //System.out.println(random);
         double y = random / Integer.MAX_VALUE;
         //System.out.println("TEST " + y);
         if(y < currProcess.probA){
@@ -196,7 +196,7 @@ public class Solution {
     }
 
     public static int getFirstWordNumber(int processNumber){
-      System.out.println("TEST " + processNumber + 1);
+      //System.out.println("TEST " + processNumber + 1);
       return ((111 * (processNumber + 1)) % processSize);
      }
     public static int getPage(int wordNumber){
@@ -207,7 +207,7 @@ public class Solution {
         for(int i = 0 ; i < frameList.size(); i ++){
           Frame f = frameList.get(i);
           if(f.currProcess != null && f.currProcess.equals(p) && f.pageNumber == pageNumber){
-            System.out.print("Hit in frame " + i + " ");
+            //System.out.print("Hit in frame " + i + " ");
             return true;
           }
         }
@@ -219,14 +219,14 @@ public class Solution {
       int evictFrameIndex = -1;
       for(int i = frameList.size() -1 ; i >= 0; i --){
         if(frameList.get(i) == null || frameList.get(i).currProcess == null){
-          System.out.print(" using free frame " + i + " ");
+          //System.out.print(" using free frame " + i + " ");
           evictFrameIndex = i;
           break;
         }
       }
       if(evictFrameIndex == -1 ){
         evictFrameIndex = findEvictFrame();
-        System.out.print( " evicting from frame " + evictFrameIndex + " ");
+        // System.out.print( " evicting from frame " + evictFrameIndex + " ");
         // System.out.println(evictFrameIndex);
         // System.out.println(frameList.size());
         //System.out.println(frameList.get(evictFrameIndex));
